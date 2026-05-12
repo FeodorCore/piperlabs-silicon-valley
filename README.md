@@ -1,2 +1,2 @@
 # piperlabs-silicon-valley
-![](website.png)
+![](src/img/website.png)

@@ -11,22 +11,45 @@
 <body>
 <header class="header">
     <div class="header__container">
+        <a href="#" class="header__logo">
+            <img src="src/img/silicon-valley-icon.png" alt="Pied Piper Logo">
+        </a>
 
-        <a href="#" class="header__logo"><img src="src/img/silicon-valley-icon.png" alt="Pied Piper Logo"></a>
+        <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
 
-        <nav class="header__nav" aria-label="Главная навигация">
-            <ul class="header__menu">
-                <li class="header__menu-item"><a href="#technology" class="header__menu-link">Технология</a></li>
-                <li class="header__menu-item"><a href="#product" class="header__menu-link">Продукт</a></li>
-                <li class="header__menu-item"><a href="#team" class="header__menu-link">Команда</a></li>
-                <li class="header__menu-item"><a href="#competitors" class="header__menu-link">Конкуренты</a></li>
-                <li class="header__menu-item"><a href="#comments" class="header__menu-link">Комментарии</a></li>
-                <li class="header__menu-item"><a href="#contacts" class="header__menu-link">Контакты</a></li>
-            </ul>
-        </nav>
-
-        <a href="#try" class="header__cta">Попробовать PiperNet</a>
+        <div class="header__mobile-wrapper">
+            <nav class="header__nav" aria-label="Главная навигация">
+                <ul class="header__menu">
+                    <li class="header__menu-item"><a href="#technology" class="header__menu-link">Технология</a></li>
+                    <li class="header__menu-item"><a href="#product" class="header__menu-link">Продукт</a></li>
+                    <li class="header__menu-item"><a href="#team" class="header__menu-link">Команда</a></li>
+                    <li class="header__menu-item"><a href="#competitors" class="header__menu-link">Конкуренты</a></li>
+                    <li class="header__menu-item"><a href="#comments" class="header__menu-link">Комментарии</a></li>
+                    <li class="header__menu-item"><a href="#contacts" class="header__menu-link">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="#try" class="header__cta">Попробовать PiperNet</a>
+        </div>
     </div>
+    <script>
+        const header = document.querySelector('.header');
+        const burger = document.querySelector('.header__burger');
+
+        burger.addEventListener('click', () => {
+            header.classList.toggle('is-open');
+            const isOpen = header.classList.contains('is-open');
+            burger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.header__menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                header.classList.remove('is-open');
+                burger.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
 </header>
 
 </body>

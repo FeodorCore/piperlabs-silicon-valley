@@ -16,7 +16,6 @@
             <img src="src/img/silicon-valley-icon.png" alt="Pied Piper">
             <span class="header__logo-text">Pied Piper</span>
         </a>
-
         <nav class="header__nav" aria-label="Главная навигация">
             <ul class="header__menu">
                 <li><a href="#technology" class="header__link">Технология</a></li>
@@ -27,7 +26,6 @@
                 <li><a href="#contacts" class="header__link">Контакты</a></li>
             </ul>
         </nav>
-
         <div class="header__actions">
             <a href="#try" class="header__cta">Попробовать PiperNet</a>
             <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
@@ -35,7 +33,6 @@
             </button>
         </div>
     </div>
-
     <div class="header__dropdown">
         <nav class="header__mobile-nav">
             <ul class="header__mobile-menu">
@@ -58,7 +55,6 @@
         <div class="hero__container">
             <h1 class="hero__title">Децентрализованный интернет.<br>Основан не на доверии — на математике.</h1>
             <p class="hero__subtitle">PiperNet — первая P2P-сеть на алгоритме middle-out. Данные сжимаются локально, передаются мгновенно и никогда не попадают на чужие серверы. Никакой слежки. Никаких дата-центров. Только вы и получатель.</p>
-
             <div class="hero__actions">
                 <a href="#technology" class="hero__btn hero__btn--primary">Узнать о технологии</a>
                 <a href="#demo" class="hero__btn hero__btn--secondary">Посмотреть демо</a>
@@ -68,9 +64,24 @@
 
     <section class="about" id="about">
         <div class="about__container">
-            <h2 class="about__title reveal">Мы не продались корпорациям.<br>Мы построили своё.</h2>
-            <div class="about__content reveal">
-                <p class="about__text">Pied Piper начиналась в инкубаторе Эрлиха Бахмана. Программист Ричард Хендрикс написал странный алгоритм сжатия, работающий из центра на ружу. Вместо того чтобы принять чек на $10 миллионов от Hooli, он основал компанию. Сегодня Pied Piper — это не просто алгоритм, а полноценная децентрализованная платформа PiperNet. Она способна заменить собой нынешнюю архитектуру интернета. И да, мы всё ещё сидим в том же инкубаторе.</p>
+            <div class="about__grid">
+                <div class="about__visual reveal">
+                    <div class="about__image-wrapper">
+                        <img src="src/img/about-team.png" alt="Команда Pied Piper в инкубаторе" class="about__image">
+                        <div class="about__image-caption">Инкубатор Эрлиха Бахмана, Пало-Альто</div>
+                    </div>
+                </div>
+                <div class="about__text-content reveal">
+                    <h2 class="about__title">Корпорации видели в этом продукт.<br>Мы увидели новую архитектуру интернета.</h2>
+                    <div class="about__accent-line"></div>
+                    <p class="about__text">Pied Piper началась как команда разработчиков в инкубаторе Эрлиха Бахмана. Они создали революционный алгоритм сжатия и отказались продавать его Hooli за $10 миллионов, чтобы построить своё будущее самостоятельно. Сегодня Pied Piper — это PiperNet: децентрализованная платформа нового поколения, способная изменить саму архитектуру интернета. И да, всё началось в том же инкубаторе.</p>
+                    <div class="about__quote">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="about__quote-icon">
+                            <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" fill="currentColor"/>
+                        </svg>
+                        <p>Несколько инженеров. Один дом. Ноль здравого смысла. И технология, способная изменить интернет. - Pied Piper</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

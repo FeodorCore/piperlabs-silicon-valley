@@ -3,54 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pied Piper — Мы не собираем ваши данные, честно</title>
-    <meta name="description"
-          content="Официальный сайт Pied Piper. Революционный алгоритм сжатия данных. Мы делаем мир лучше, а интернет — децентрализованным. Возможно.">
+    <title>Pied Piper — Децентрализованный интернет</title>
+    <meta name="description" content="Официальный сайт Pied Piper. Революционный алгоритм сжатия данных. Мы делаем мир лучше, а интернет — децентрализованным.">
     <link rel="stylesheet" href="style.css">
+    <script src="header-menu.js" defer></script>
 </head>
 <body>
 <header class="header">
     <div class="header__container">
         <a href="#" class="header__logo">
-            <img src="src/img/silicon-valley-icon.png" alt="Pied Piper Logo">
+            <img src="src/img/silicon-valley-icon.png" alt="Pied Piper">
+            <span class="header__logo-text">Pied Piper</span>
         </a>
 
-        <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+        <nav class="header__nav" aria-label="Главная навигация">
+            <ul class="header__menu">
+                <li><a href="#technology" class="header__link">Технология</a></li>
+                <li><a href="#product" class="header__link">Продукт</a></li>
+                <li><a href="#team" class="header__link">Команда</a></li>
+                <li><a href="#competitors" class="header__link">Конкуренты</a></li>
+                <li><a href="#comments" class="header__link">Комментарии</a></li>
+                <li><a href="#contacts" class="header__link">Контакты</a></li>
+            </ul>
+        </nav>
 
-        <div class="header__mobile-wrapper">
-            <nav class="header__nav" aria-label="Главная навигация">
-                <ul class="header__menu">
-                    <li class="header__menu-item"><a href="#technology" class="header__menu-link">Технология</a></li>
-                    <li class="header__menu-item"><a href="#product" class="header__menu-link">Продукт</a></li>
-                    <li class="header__menu-item"><a href="#team" class="header__menu-link">Команда</a></li>
-                    <li class="header__menu-item"><a href="#competitors" class="header__menu-link">Конкуренты</a></li>
-                    <li class="header__menu-item"><a href="#comments" class="header__menu-link">Комментарии</a></li>
-                    <li class="header__menu-item"><a href="#contacts" class="header__menu-link">Контакты</a></li>
-                </ul>
-            </nav>
+        <div class="header__actions">
             <a href="#try" class="header__cta">Попробовать PiperNet</a>
+            <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
-    <script>
-        const header = document.querySelector('.header');
-        const burger = document.querySelector('.header__burger');
 
-        burger.addEventListener('click', () => {
-            header.classList.toggle('is-open');
-            const isOpen = header.classList.contains('is-open');
-            burger.setAttribute('aria-expanded', isOpen);
-        });
-
-        document.querySelectorAll('.header__menu-link').forEach(link => {
-            link.addEventListener('click', () => {
-                header.classList.remove('is-open');
-                burger.setAttribute('aria-expanded', 'false');
-            });
-        });
-    </script>
+    <div class="header__dropdown">
+        <nav class="header__mobile-nav">
+            <ul class="header__mobile-menu">
+                <li><a href="#technology" class="header__mobile-link">Технология</a></li>
+                <li><a href="#product" class="header__mobile-link">Продукт</a></li>
+                <li><a href="#team" class="header__mobile-link">Команда</a></li>
+                <li><a href="#competitors" class="header__mobile-link">Конкуренты</a></li>
+                <li><a href="#comments" class="header__mobile-link">Комментарии</a></li>
+                <li><a href="#contacts" class="header__mobile-link">Контакты</a></li>
+            </ul>
+        </nav>
+        <a href="#try" class="header__mobile-cta">Попробовать PiperNet</a>
+    </div>
+    <div class="header__overlay"></div>
 </header>
 
+<main>
+    <section class="hero" id="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__container">
+            <h1 class="hero__title">Децентрализованный интернет.<br>Основан не на доверии — на математике.</h1>
+            <p class="hero__subtitle">PiperNet — первая P2P-сеть на алгоритме middle-out. Данные сжимаются локально, передаются мгновенно и никогда не попадают на чужие серверы. Никакой слежки. Никаких дата-центров. Только вы и получатель.</p>
+
+            <div class="hero__actions">
+                <a href="#technology" class="hero__btn hero__btn--primary">Узнать о технологии</a>
+                <a href="#demo" class="hero__btn hero__btn--secondary">Посмотреть демо</a>
+            </div>
+
+            <div class="hero__badge">
+                <span class="hero__badge-dot"></span>
+                Коэффициент Вайсмана: 5.2 • Zero-Trust • Open Source
+            </div>
+        </div>
+    </section>
+</main>
 </body>
 </html>

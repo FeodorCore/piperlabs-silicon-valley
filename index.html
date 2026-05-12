@@ -149,35 +149,105 @@
                 <div class="achievements__accent-line"></div>
             </div>
 
-            <div class="achievements__grid reveal">
-                <div class="achievement-card">
-                    <div class="achievement-card__value">100%</div>
-                    <h3 class="achievement-card__title">Обратимое сжатие</h3>
-                    <p class="achievement-card__text">Ни одного потерянного бита. Динеш подтвердит — тесты на миллионах файлов не выявили потерь.</p>
+            <div class="achievements__layout reveal">
+                <div class="achievements__metrics">
+                    <div class="metric-card">
+                        <span class="metric-card__label">LOSSLESS COMPRESSION</span>
+                        <div class="metric-card__value">100%</div>
+                        <div class="metric-card__bar"><div class="metric-card__fill" style="--target: 100%"></div></div>
+                        <p class="metric-card__desc">Ни одного потерянного бита. Динеш подтвердит.</p>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-card__label">STORAGE EFFICIENCY</span>
+                        <div class="metric-card__value">99.8%</div>
+                        <div class="metric-card__bar"><div class="metric-card__fill" style="--target: 99.8%"></div></div>
+                        <p class="metric-card__desc">Петабайт на носителе размером с ноготь.</p>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-card__label">P2P LATENCY</span>
+                        <div class="metric-card__value">&lt;10ms</div>
+                        <div class="metric-card__bar"><div class="metric-card__fill" style="--target: 18%"></div></div>
+                        <p class="metric-card__desc">Даже между континентами. Без дата-центров.</p>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-card__label">ACTIVE NODES</span>
+                        <div class="metric-card__value">300+</div>
+                        <div class="metric-card__bar"><div class="metric-card__fill" style="--target: 65%"></div></div>
+                        <p class="metric-card__desc">От подвала Гилфойла до дома Эрлиха. Сеть растёт.</p>
+                    </div>
                 </div>
-                <div class="achievement-card">
-                    <div class="achievement-card__value">99,8%</div>
-                    <h3 class="achievement-card__title">Эффективнее хранение</h3>
-                    <p class="achievement-card__text">Петабайт данных помещается на носителе размером с ноготь. Серьёзно, Гилфойл уже прячет прототип.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-card__value">&lt;10 мс</div>
-                    <h3 class="achievement-card__title">Задержка P2P-передачи</h3>
-                    <p class="achievement-card__text">Даже между континентами. Без дата-центров, без маршрутизации через чужие узлы.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-card__value">300+</div>
-                    <h3 class="achievement-card__title">Активных нод</h3>
-                    <p class="achievement-card__text">От подвала Гилфойла до дома Эрлиха. Сеть растёт, и каждая нода делает её быстрее.</p>
+                
+                <div class="achievements__dev-zone">
+                    <div class="dev-terminal">
+                        <div class="dev-terminal__header">
+                            <span class="dev-terminal__dot red"></span>
+                            <span class="dev-terminal__dot yellow"></span>
+                            <span class="dev-terminal__dot green"></span>
+                            <span class="dev-terminal__title">weissman_formula.c</span>
+                        </div>
+                        <div class="dev-terminal__body">
+                            <code class="dev-terminal__code">
+                                <span class="code-comment">// Формула Вайсмана</span><br>
+                                <span class="code-keyword">W</span> = <span class="code-func">lim</span> (data → ∞) (<span class="code-var">t_compress</span> / <span class="code-var">original_size</span>) × <span class="code-var">fidelity_factor</span><br>
+                                <span class="code-comment">// Для middle-out fidelity_factor ≡ 1.0</span>
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="richard-note">
+                        <div class="richard-note__pin"></div>
+                        <blockquote class="richard-note__text">
+                            «W — это не формула компрессии. Это способ математически доказать, что инфраструктура интернета была написана людьми, которые слишком боялись думать middle-out.»
+                        </blockquote>
+                        <cite class="richard-note__author">— Ричард Хендрикс, CEO Pied Piper</cite>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="experts" id="experts">
+        <div class="experts__container">
+            <div class="experts__header reveal">
+                <h2 class="experts__title">Люди, которые разбираются.<br>Или хотя бы думают, что разбираются.</h2>
+                <div class="experts__accent-line"></div>
+            </div>
 
-            <div class="achievements__footnote reveal">
-                <div class="achievements__formula">
-                    <span class="achievements__formula-label">Формула Вайсмана</span>
-                    <code class="achievements__formula-code">W = lim (data → ∞) (t_compress / original_size) × fidelity_factor</code>
-                    <span class="achievements__formula-note">Для middle-out <strong>fidelity_factor ≡ 1.0</strong></span>
-                </div>
+            <div class="experts__grid reveal">
+                <article class="expert-card expert-card--left">
+                    <div class="expert-card__bg-quote">“</div>
+                    <blockquote class="expert-card__text">«Pied Piper — единственный софт, где roadmap выглядит как предсмертная записка DevOps-инженера.»</blockquote>
+                    <div class="expert-card__author">
+                        <strong class="expert-card__name">Нельсон Биггетти</strong>
+                        <span class="expert-card__role">Инженер / Бывший сотрудник Hooli</span>
+                    </div>
+                </article>
+
+                <article class="expert-card expert-card--right">
+                    <div class="expert-card__bg-quote">“</div>
+                    <blockquote class="expert-card__text">«Я дал денег не потому, что всё понял, а потому, что Питер Грегори сказал "это круто". Плюс парень в свитере смотрел на меня так, будто сейчас расплачется, если я откажу.»</blockquote>
+                    <div class="expert-card__author">
+                        <strong class="expert-card__name">Расс Ханнеман</strong>
+                        <span class="expert-card__role">Interficit Capital</span>
+                    </div>
+                </article>
+
+                <article class="expert-card expert-card--left">
+                    <div class="expert-card__bg-quote">“</div>
+                    <blockquote class="expert-card__text">«Это я разглядел потенциал в идее Ричарда. Без меня они бы до сих пор обсуждали теорию струн в гараже. Pied Piper — мой вклад в историю, и да, я горд.»</blockquote>
+                    <div class="expert-card__author">
+                        <strong class="expert-card__name">Эрлих Бахман</strong>
+                        <span class="expert-card__role">Основатель инкубатора</span>
+                    </div>
+                </article>
+
+                <article class="expert-card expert-card--right">
+                    <div class="expert-card__bg-quote">“</div>
+                    <blockquote class="expert-card__text">«Я видел сотни стартапов. Pied Piper — единственный, где CEO спит под столом, а CTO разговаривает с серверами. Но результаты говорят сами за себя.»</blockquote>
+                    <div class="expert-card__author">
+                        <strong class="expert-card__name">Джаред Данн</strong>
+                        <span class="expert-card__role">COO Pied Piper</span>
+                    </div>
+                </article>
             </div>
         </div>
     </section>

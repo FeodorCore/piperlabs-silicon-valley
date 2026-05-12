@@ -172,7 +172,7 @@ body.menu-open { overflow: hidden; }
     .hero__title, .hero__subtitle, .hero__actions { animation: none !important; }
 }
 
-/* === ABOUT (ENHANCED) === */
+/* === ABOUT === */
 .about {
     padding: 120px 24px;
     background: var(--bg-white);
@@ -219,7 +219,7 @@ body.menu-open { overflow: hidden; }
     height: auto;
     aspect-ratio: 4/3;
     object-fit: cover;
-    background: #e5e7eb; /* fallback */
+    background: #e5e7eb;
 }
 .about__image-caption {
     position: absolute;
@@ -295,7 +295,7 @@ body.menu-open { overflow: hidden; }
         gap: 48px;
     }
     .about__visual {
-        order: -1; /* изображение сверху на мобильных */
+        order: -1;
         max-width: 500px;
         margin: 0 auto;
         width: 100%;
@@ -316,6 +316,168 @@ body.menu-open { overflow: hidden; }
     }
     .about__quote {
         padding: 16px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* === TECHNOLOGY === */
+.technology {
+    padding: 120px 24px;
+    background: var(--bg-light);
+    position: relative;
+    overflow: hidden;
+}
+.technology::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(47,159,70,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.technology__container {
+    max-width: var(--width-max);
+    margin: 0 auto;
+}
+.technology__header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+.technology__title {
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+.technology__accent-line {
+    width: 60px;
+    height: 4px;
+    background: var(--brand-green);
+    border-radius: 2px;
+    margin: 0 auto 28px;
+}
+.technology__headline {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 760px;
+    margin: 0 auto;
+}
+.technology__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 64px;
+}
+.tech-card {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 36px 28px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tech-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+}
+.tech-card__icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(47,159,70,0.08);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-green);
+    margin-bottom: 20px;
+}
+.tech-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+.tech-card__text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 280px;
+}
+
+/* Цитата в технологии — исправленный аккуратный вариант */
+.technology__quote {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 780px;
+    margin: 0 auto;
+}
+.technology__quote-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(47,159,70,0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-green);
+}
+.technology__quote blockquote {
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin: 0;
+}
+.technology__quote blockquote p {
+    margin-bottom: 12px;
+}
+.technology__quote cite {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 1024px) {
+    .technology__cards {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .technology__header {
+        margin-bottom: 48px;
+    }
+}
+@media (max-width: 640px) {
+    .technology {
+        padding: 80px 16px;
+    }
+    .technology__quote {
+        padding: 24px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .technology__quote-icon {
+        margin-bottom: 8px;
     }
 }
 @media (prefers-reduced-motion: reduce) {

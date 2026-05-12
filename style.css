@@ -415,7 +415,6 @@ body.menu-open { overflow: hidden; }
     max-width: 280px;
 }
 
-/* Цитата в технологии — исправленный аккуратный вариант */
 .technology__quote {
     background: var(--bg-white);
     border-radius: 20px;
@@ -478,6 +477,144 @@ body.menu-open { overflow: hidden; }
     }
     .technology__quote-icon {
         margin-bottom: 8px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* === ACHIEVEMENTS === */
+.achievements {
+    padding: 120px 24px;
+    background: var(--bg-white);
+    position: relative;
+    overflow: hidden;
+}
+.achievements::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(47,159,70,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.achievements__container {
+    max-width: var(--width-max);
+    margin: 0 auto;
+}
+.achievements__header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+.achievements__title {
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+.achievements__accent-line {
+    width: 60px;
+    height: 4px;
+    background: var(--brand-green);
+    border-radius: 2px;
+    margin: 0 auto;
+}
+.achievements__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-bottom: 64px;
+}
+.achievement-card {
+    background: var(--bg-light);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.achievement-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+}
+.achievement-card__value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--brand-green);
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+.achievement-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+.achievement-card__text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+.achievements__footnote {
+    max-width: 720px;
+    margin: 0 auto;
+}
+.achievements__formula {
+    background: var(--bg-light);
+    border-radius: 16px;
+    padding: 24px 28px;
+    text-align: center;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+.achievements__formula-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+.achievements__formula-code {
+    display: block;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 1rem;
+    background: var(--bg-white);
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    word-break: break-word;
+    line-height: 1.5;
+}
+.achievements__formula-note {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 1024px) {
+    .achievements__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+@media (max-width: 640px) {
+    .achievements {
+        padding: 80px 16px;
+    }
+    .achievements__grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .achievement-card__value {
+        font-size: 2rem;
     }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiperNet Lab — Попробовать сжатие</title>
+    <meta name="description" content="PiperNet Quantum Compression Lab. Интерактивная симуляция алгоритма middle-out.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="try.css">
+    <script src="try.js" defer></script>
+</head>
+<body class="lab-body">
+<header class="lab-header">
+    <a href="index.html" class="lab-back">← Назад на Pied Piper</a>
+    <div class="lab-brand">PiperNet <span class="lab-brand-accent">Quantum Lab</span></div>
+    <div class="lab-status" id="netStatus">🟢 P2P Network: Online</div>
+</header>
+
+<main class="lab-container">
+    <section class="lab-terminal">
+        <div class="terminal-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="terminal-title">middle_out_compressor v3.1.4 // quantum_mode</span>
+        </div>
+
+        <div class="terminal-body">
+            <canvas id="particleGrid" class="lab-grid-bg"></canvas>
+
+            <div class="lab-input-zone">
+                <label for="labText">Введите данные для сжатия:</label>
+                <textarea id="labText" placeholder="Текст, код, логи, или признание Гэвина Белсона..."></textarea>
+                <div class="lab-meta">
+                    <span id="charCount">0</span> символов | <span id="entropyPreview">Энтропия: —</span>
+                </div>
+            </div>
+
+            <div class="lab-visuals">
+                <div class="entropy-spectrum" id="entropySpectrum"></div>
+                <div class="p2p-network" id="p2pNetwork"></div>
+            </div>
+
+            <div class="lab-controls">
+                <button id="compressBtn" class="lab-btn primary">▶ Сжать Middle-Out</button>
+                <button id="clearBtn" class="lab-btn secondary">⟲ Очистить</button>
+            </div>
+
+            <div class="lab-output" id="labOutput" hidden>
+                <div class="output-header">📊 Результат квантового сжатия</div>
+                <div class="output-grid">
+                    <div class="metric">Коэффициент Вайсмана: <strong id="weissmanVal">—</strong></div>
+                    <div class="metric">Исходный размер: <strong id="origSize">0</strong> B</div>
+                    <div class="metric">Сжатый размер: <strong id="compSize">0</strong> B</div>
+                    <div class="metric">Экономия: <strong id="savings">0%</strong></div>
+                </div>
+                <div class="system-msg" id="systemMsg"></div>
+                <div class="hooli-warning" id="hooliWarning" hidden>
+                    ⚠️ Hooli Spy Detection: Обнаружен корпоративный шпионаж. Протокол безопасности активирован. Коэффициент искусственно занижен.
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

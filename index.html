@@ -10,6 +10,7 @@
     <script src="js/header-menu.js" defer></script>
     <script src="js/scroll-reveal.js" defer></script>
     <script src="js/comments.js" defer></script>
+    <script src="js/demo.js" defer></script>
 </head>
 <body>
 <header class="header">
@@ -61,7 +62,7 @@
                 Только вы и получатель.</p>
             <div class="hero__actions">
                 <a href="#technology" class="hero__btn hero__btn--primary">Узнать о технологии</a>
-                <a href="#demo" class="hero__btn hero__btn--secondary">Посмотреть демо</a>
+                <a class="hero__btn hero__btn--secondary">Посмотреть демо</a>
             </div>
         </div>
     </section>
@@ -902,6 +903,53 @@
             </div>
         </div>
     </footer>
+
+    <div id="demoModal" class="modal" aria-hidden="true">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h3 class="modal__title">Middle‑Out компрессор</h3>
+                <button class="modal__close" id="closeModalBtn" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__description">
+                    Попробуйте алгоритм сжатия <strong>middle‑out</strong> в действии. Введите любой текст —
+                    мы рассчитаем <strong>коэффициент Вайсмана</strong> и покажем, как технология Pied Piper сжимает данные без потерь.
+                </p>
+                <div class="demo__field">
+                    <label for="demoText">Ваш текст:</label>
+                    <textarea id="demoText" rows="5" placeholder="Например: AAAAABBBBBCCCCCDDDDD... или целая статья из Википедии"></textarea>
+                    <div class="demo__counter">
+                        <span id="charCounter">0</span> символов
+                    </div>
+                </div>
+                <div class="demo__actions">
+                    <button id="compressBtn" class="demo__btn demo__btn--primary">Сжать middle‑out</button>
+                    <button id="clearDemoBtn" class="demo__btn demo__btn--secondary">Очистить</button>
+                </div>
+                <div id="demoResult" class="demo__result" hidden>
+                    <div class="result__header">📊 Результат сжатия (без потерь)</div>
+                    <div class="result__weissman">
+                        Коэффициент Вайсмана: <span id="weissmanValue">—</span>
+                    </div>
+                    <div class="result__sizes">
+                        <div>Исходный размер: <strong id="originalSize">0</strong> байт</div>
+                        <div>Сжатый размер: <strong id="compressedSize">0</strong> байт</div>
+                    </div>
+                    <div class="result__formula">
+                        <code>W = lim (data→∞) (t_compress / original_size) × fidelity_factor<br>
+                            <span class="formula-note">Для middle‑out fidelity_factor ≡ 1.0</span></code>
+                    </div>
+                    <div id="animationProgress" class="progress-bar" style="display: none;">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <p class="modal__note">Алгоритм работает локально в вашем браузере — данные не отправляются на сервер.</p>
+            </div>
+        </div>
+    </div>
 </main>
 </body>
 </html>

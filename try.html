@@ -3,92 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PiperNet Engine — Среда сжатия</title>
+    <title>PiperNet Engine // Middle-Out Compression</title>
     <meta name="description" content="Интерактивная среда тестирования алгоритма middle-out. Телеметрия, метрики, конвейер.">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="try.css">
     <script src="try.js" defer></script>
 </head>
-<body class="engine-body">
-<header class="engine-header">
-    <a href="index.html" class="engine-back">← Pied Piper</a>
-    <div class="engine-id">PIPERNET <span class="engine-build">BUILD 3.1.4 // MIDDLE-OUT</span></div>
-    <div class="engine-clock" id="sysClock">00:00:00</div>
+<body>
+<header class="top-bar">
+    <a href="index.html" class="back-link">← Pied Piper</a>
+    <div class="build-tag">PIPERNET <span class="version">v4.0.0 // MIDDLE-OUT</span></div>
+    <div class="clock" id="clock">00:00:00</div>
 </header>
 
-<main class="engine-grid">
-    <section class="panel panel-input">
-        <div class="panel-head">
-            <h2>Входной буфер</h2>
-            <div class="panel-tags">
-                <span class="tag" id="tagBytes">0 B</span>
-                <span class="tag" id="tagEntropy">H: —</span>
+<main class="dashboard">
+    <section class="panel input-panel">
+        <div class="panel-header">
+            <h2>Входной поток</h2>
+            <div class="live-stats">
+                <span class="stat" id="statBytes">0 B</span>
+                <span class="stat" id="statEntropy">H: 0.00</span>
             </div>
         </div>
         <div class="panel-body">
-            <textarea id="inputBuffer" placeholder="Вставьте данные для обработки..."></textarea>
+            <textarea id="inputData" placeholder="Вставьте текст, код или данные для сжатия..." spellcheck="false"></textarea>
         </div>
     </section>
 
-    <section class="panel panel-pipeline">
-        <div class="panel-head"><h2>Конвейер</h2></div>
-        <div class="pipeline-track">
-            <div class="pipeline-node" data-stage="parse"><div class="node-core"></div><span>PARSE</span></div>
-            <div class="pipeline-link"></div>
-            <div class="pipeline-node" data-stage="analyze"><div class="node-core"></div><span>ANALYZE</span></div>
-            <div class="pipeline-link"></div>
-            <div class="pipeline-node" data-stage="compress"><div class="node-core"></div><span>COMPRESS</span></div>
-            <div class="pipeline-link"></div>
-            <div class="pipeline-node" data-stage="distribute"><div class="node-core"></div><span>DISTRIBUTE</span></div>
+    <section class="panel pipeline-panel">
+        <div class="panel-header"><h2>Конвейер обработки</h2></div>
+        <div class="pipeline">
+            <div class="node" data-step="parse"><div class="core"></div><span>PARSE</span></div>
+            <div class="link"></div>
+            <div class="node" data-step="analyze"><div class="core"></div><span>ANALYZE</span></div>
+            <div class="link"></div>
+            <div class="node" data-step="compress"><div class="core"></div><span>COMPRESS</span></div>
+            <div class="link"></div>
+            <div class="node" data-step="distribute"><div class="core"></div><span>DISTRIBUTE</span></div>
         </div>
-        <div class="pipeline-status" id="pipelineStatus">Ожидание данных</div>
+        <div class="pipeline-status" id="pipelineStatus">Ожидание данных...</div>
     </section>
 
-    <section class="panel panel-metrics">
-        <div class="panel-head"><h2>Метрики</h2></div>
-        <div class="metrics-cluster">
-            <div class="metric-block">
-                <span class="metric-label">WEISSMAN</span>
-                <span class="metric-val" id="mWeissman">—</span>
+    <section class="panel metrics-panel">
+        <div class="panel-header"><h2>Метрики сжатия</h2></div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">WEISSMAN SCORE</div>
+                <div class="metric-value" id="mWeissman">—</div>
             </div>
-            <div class="metric-block">
-                <span class="metric-label">ORIGINAL</span>
-                <span class="metric-val" id="mOriginal">0 B</span>
+            <div class="metric-card">
+                <div class="metric-label">ORIGINAL</div>
+                <div class="metric-value" id="mOriginal">0 B</div>
             </div>
-            <div class="metric-block">
-                <span class="metric-label">COMPRESSED</span>
-                <span class="metric-val" id="mCompressed">0 B</span>
+            <div class="metric-card">
+                <div class="metric-label">COMPRESSED</div>
+                <div class="metric-value" id="mCompressed">0 B</div>
             </div>
-            <div class="metric-block">
-                <span class="metric-label">SAVINGS</span>
-                <span class="metric-val" id="mSavings">0%</span>
+            <div class="metric-card">
+                <div class="metric-label">SAVINGS</div>
+                <div class="metric-value" id="mSavings">0%</div>
+                <div class="progress-ring">
+                    <svg viewBox="0 0 36 36">
+                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+                        <path id="ringPath" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="0, 100" stroke-linecap="round"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="panel panel-telemetry">
-        <div class="panel-head">
+    <section class="panel terminal-panel">
+        <div class="panel-header">
             <h2>Телеметрия</h2>
             <button id="clearLog" class="btn-ghost">CLEAR</button>
         </div>
-        <div class="telemetry-feed" id="telemetryFeed">
-            <div class="log-line"><span class="log-tag sys">SYS</span> Движок готов. Ожидание входного потока.</div>
+        <div class="terminal" id="terminal">
+            <div class="log-entry"><span class="tag sys">SYS</span> Движок инициализирован. Ожидание входного потока.</div>
         </div>
     </section>
 
-    <div class="engine-controls">
-        <button id="runEngine" class="btn-primary">
-            <span class="btn-spinner"></span>
-            <span class="btn-text">ИНИЦИАЛИЗИРОВАТЬ КОНВЕЙЕР</span>
+    <div class="controls">
+        <button id="runBtn" class="btn-primary">
+            <span class="spinner"></span>
+            <span class="text">ЗАПУСТИТЬ СЖАТИЕ</span>
         </button>
-        <button id="resetEngine" class="btn-secondary">СБРОС</button>
+        <button id="resetBtn" class="btn-secondary">СБРОС</button>
     </div>
 
-    <div class="engine-alert" id="hooliAlert" hidden>
-        <div class="alert-bar"></div>
-        <div class="alert-content">
-            <strong>ПРОТОКОЛ ИЗОЛЯЦИИ</strong>
-            <p>Обнаружены сигнатуры корпоративного трафика. Коэффициент скорректирован.</p>
+    <div class="toast" id="hooliToast" hidden>
+        <div class="toast-bar"></div>
+        <div class="toast-content">
+            <strong>⚠️ ПРОТОКОЛ ИЗОЛЯЦИИ</strong>
+            <p>Обнаружены сигнатуры Hooli. Коэффициент скорректирован.</p>
         </div>
     </div>
 </main>

@@ -1,29 +1,31 @@
 (function() {
+    'use strict';
+
     // DOM Elements
-    const buffer = document.getElementById('inputBuffer');
-    const tagBytes = document.getElementById('tagBytes');
-    const tagEntropy = document.getElementById('tagEntropy');
-    const runBtn = document.getElementById('runEngine');
-    const resetBtn = document.getElementById('resetEngine');
+    const input = document.getElementById('inputData');
+    const statBytes = document.getElementById('statBytes');
+    const statEntropy = document.getElementById('statEntropy');
+    const runBtn = document.getElementById('runBtn');
+    const resetBtn = document.getElementById('resetBtn');
     const clearLogBtn = document.getElementById('clearLog');
-    const telemetryFeed = document.getElementById('telemetryFeed');
-    const hooliAlert = document.getElementById('hooliAlert');
-    const pipelineNodes = document.querySelectorAll('.pipeline-node');
-    const pipelineLinks = document.querySelectorAll('.pipeline-link');
+    const terminal = document.getElementById('terminal');
+    const hooliToast = document.getElementById('hooliToast');
+    const pipelineNodes = document.querySelectorAll('.node');
+    const pipelineLinks = document.querySelectorAll('.link');
     const pipelineStatus = document.getElementById('pipelineStatus');
     const mWeissman = document.getElementById('mWeissman');
     const mOriginal = document.getElementById('mOriginal');
     const mCompressed = document.getElementById('mCompressed');
     const mSavings = document.getElementById('mSavings');
-    const sysClock = document.getElementById('sysClock');
-    const btnText = runBtn ? runBtn.querySelector('.btn-text') : null;
+    const ringPath = document.getElementById('ringPath');
+    const clock = document.getElementById('clock');
+    const btnText = runBtn?.querySelector('.text');
 
     let isRunning = false;
 
     // Clock
     function updateClock() {
-        if (!sysClock) return;
-        sysClock.textContent = new Date().toLocaleTimeString('ru-RU', { hour12: false });
+        if (clock) clock.textContent = new Date().toLocaleTimeString('ru-RU', { hour12: false });
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -51,13 +53,13 @@
     }
 
     function addLog(msg, type = 'sys') {
-        if (!telemetryFeed) return;
+        if (!terminal) return;
         const line = document.createElement('div');
-        line.className = 'log-line';
+        line.className = 'log-entry';
         const time = new Date().toLocaleTimeString('ru-RU', { hour12: false });
-        line.innerHTML = `<span class="log-tag ${type}">${type.toUpperCase()}</span> [${time}] ${msg}`;
-        telemetryFeed.appendChild(line);
-        telemetryFeed.scrollTop = telemetryFeed.scrollHeight;
+        line.innerHTML = `<span class="tag ${type}">${type.toUpperCase()}</span> [${time}] ${msg}`;
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
     }
 
     function animateValue(el, start, end, duration, suffix = '') {
@@ -77,13 +79,11 @@
     function setPipelineStage(stageName) {
         const stages = ['parse', 'analyze', 'compress', 'distribute'];
         const currentIdx = stages.indexOf(stageName);
-
         pipelineNodes.forEach((n, i) => {
             n.classList.remove('active', 'done');
             if (i === currentIdx) n.classList.add('active');
             else if (i < currentIdx) n.classList.add('done');
         });
-
         pipelineLinks.forEach((l, i) => {
             l.classList.toggle('active', i < currentIdx);
         });
@@ -92,24 +92,31 @@
     function resetPipeline() {
         pipelineNodes.forEach(n => n.classList.remove('active', 'done'));
         pipelineLinks.forEach(l => l.classList.remove('active'));
-        if (pipelineStatus) pipelineStatus.textContent = 'Ожидание данных';
+        if (pipelineStatus) pipelineStatus.textContent = 'Ожидание данных...';
+    }
+
+    function updateRing(percent) {
+        if (!ringPath) return;
+        const circumference = 100;
+        const offset = circumference - (percent / 100) * circumference;
+        ringPath.style.strokeDasharray = `${percent}, ${circumference}`;
     }
 
     // Input handling
-    if (buffer) {
-        buffer.addEventListener('input', () => {
-            const txt = buffer.value;
+    if (input) {
+        input.addEventListener('input', () => {
+            const txt = input.value;
             const bytes = new Blob([txt]).size;
-            if (tagBytes) tagBytes.textContent = formatBytes(bytes);
-            if (tagEntropy) tagEntropy.textContent = `H: ${calcEntropy(txt).toFixed(2)}`;
+            if (statBytes) statBytes.textContent = formatBytes(bytes);
+            if (statEntropy) statEntropy.textContent = `H: ${calcEntropy(txt).toFixed(2)}`;
         });
     }
 
-    // Compression
+    // Compression Engine
     if (runBtn) {
         runBtn.addEventListener('click', async () => {
             if (isRunning) return;
-            const text = buffer ? buffer.value.trim() : '';
+            const text = input ? input.value.trim() : '';
             if (!text) {
                 addLog('Буфер пуст. Введите данные для обработки.', 'warn');
                 return;
@@ -119,7 +126,7 @@
             runBtn.disabled = true;
             runBtn.classList.add('loading');
             if (btnText) btnText.textContent = 'ОБРАБОТКА...';
-            if (hooliAlert) hooliAlert.hidden = true;
+            if (hooliToast) hooliToast.hidden = true;
             resetPipeline();
             addLog('Инициализация конвейера. Загрузка данных в память.', 'sys');
 
@@ -128,23 +135,23 @@
             try {
                 setPipelineStage('parse');
                 if (pipelineStatus) pipelineStatus.textContent = 'Парсинг структуры...';
-                await delay(350);
+                await delay(400);
                 addLog('Парсинг завершён. Структура данных валидна.', 'sys');
 
                 setPipelineStage('analyze');
                 if (pipelineStatus) pipelineStatus.textContent = 'Расчёт энтропии...';
-                await delay(450);
+                await delay(500);
                 const entropy = calcEntropy(text);
                 addLog(`Анализ: H=${entropy.toFixed(2)} бит/сим. Поиск точки максимальной плотности.`, 'sys');
 
                 setPipelineStage('compress');
                 if (pipelineStatus) pipelineStatus.textContent = 'Выполняется middle-out...';
-                await delay(550);
+                await delay(600);
                 addLog('Сжатие запущено. Распределение нагрузки по ядрам.', 'sys');
 
                 setPipelineStage('distribute');
                 if (pipelineStatus) pipelineStatus.textContent = 'Финализация...';
-                await delay(350);
+                await delay(400);
                 addLog('Конвейер завершён. Подготовка метрик.', 'ok');
 
                 // Math
@@ -160,7 +167,7 @@
                 const isHooli = hooliRegex.test(text);
                 if (isHooli) {
                     weissman *= 0.55;
-                    if (hooliAlert) hooliAlert.hidden = false;
+                    if (hooliToast) hooliToast.hidden = false;
                     addLog('Обнаружены сигнатуры Hooli. Применён протокол изоляции.', 'warn');
                 }
 
@@ -168,10 +175,11 @@
                 const savedPercent = Math.round((1 - compressedBytes / originalBytes) * 100);
 
                 // Animate metrics
-                animateValue(mWeissman, 0, weissman, 500);
+                animateValue(mWeissman, 0, weissman, 600);
                 if (mOriginal) mOriginal.textContent = formatBytes(originalBytes);
-                animateValue(mCompressed, 0, compressedBytes, 500, ' B');
-                animateValue(mSavings, 0, savedPercent, 500, '%');
+                animateValue(mCompressed, 0, compressedBytes, 600, ' B');
+                animateValue(mSavings, 0, savedPercent, 600, '%');
+                updateRing(savedPercent);
 
                 if (pipelineStatus) pipelineStatus.textContent = 'Готово';
                 addLog(`Результат: W=${weissman.toFixed(2)} | Экономия: ${savedPercent}%`, 'ok');
@@ -182,7 +190,7 @@
                 isRunning = false;
                 runBtn.disabled = false;
                 runBtn.classList.remove('loading');
-                if (btnText) btnText.textContent = 'ИНИЦИАЛИЗИРОВАТЬ КОНВЕЙЕР';
+                if (btnText) btnText.textContent = 'ЗАПУСТИТЬ СЖАТИЕ';
             }
         });
     }
@@ -191,24 +199,25 @@
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
             if (isRunning) return;
-            if (buffer) {
-                buffer.value = '';
-                buffer.dispatchEvent(new Event('input'));
+            if (input) {
+                input.value = '';
+                input.dispatchEvent(new Event('input'));
             }
             if (mWeissman) mWeissman.textContent = '—';
             if (mOriginal) mOriginal.textContent = '0 B';
             if (mCompressed) mCompressed.textContent = '0 B';
             if (mSavings) mSavings.textContent = '0%';
+            updateRing(0);
             resetPipeline();
-            if (hooliAlert) hooliAlert.hidden = true;
+            if (hooliToast) hooliToast.hidden = true;
             addLog('Среда сброшена. Ожидание входного потока.', 'sys');
         });
     }
 
     if (clearLogBtn) {
         clearLogBtn.addEventListener('click', () => {
-            if (telemetryFeed) {
-                telemetryFeed.innerHTML = '<div class="log-line"><span class="log-tag sys">SYS</span> Лог очищен.</div>';
+            if (terminal) {
+                terminal.innerHTML = '<div class="log-entry"><span class="tag sys">SYS</span> Лог очищен.</div>';
             }
         });
     }
